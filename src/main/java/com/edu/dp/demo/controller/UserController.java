@@ -14,7 +14,7 @@ import java.util.List;
  * @description 用户管理服务器
  * @date 2020/05/13
  */
-@Controller
+@RestController
 @CrossOrigin
 @RequestMapping(value = "/orders")
 public class UserController {

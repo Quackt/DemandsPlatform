@@ -14,7 +14,7 @@ import java.sql.Date;
 @Entity
 @Table
 public class User {
-    public static enum Sex {MALE,FEMALE};
+    public static enum Sex {MALE,FEMALE,unknown};
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
@@ -27,7 +27,7 @@ public class User {
     private Sex sex;
 
     @Column
-    private String schoolCardId;
+    private Long schoolCardId;
 
     @Column
     private String email;
@@ -41,9 +41,12 @@ public class User {
     @Column
     private String password;
 
-    public User(){}
+    public User(){
+        java.util.Date utilDate = new java.util.Date();
+        this.date = new java.sql.Date(utilDate.getTime());
+    }
 
-    public User(String name, Sex sex, String schoolCardId, String email, String phone, String password) {
+    public User(String name, Sex sex, Long schoolCardId, String email, String phone, String password) {
         this.name = name;
         this.sex = sex;
         this.schoolCardId = schoolCardId;
@@ -78,11 +81,11 @@ public class User {
         this.sex = sex;
     }
 
-    public String getSchoolCardId() {
+    public Long getSchoolCardId() {
         return schoolCardId;
     }
 
-    public void setSchoolCardId(String schoolCardId) {
+    public void setSchoolCardId(Long schoolCardId) {
         this.schoolCardId = schoolCardId;
     }
 

@@ -40,7 +40,7 @@ public class OrderService {
     public void updateMessage(OrderVO orderVO) {
         long id = orderVO.getOrderId();
         if(!orderVO.getDeadline().equals(0)){
-            orderRepository.updateDeadlingById(id,orderVO.getDeadline());
+            orderRepository.updateDeadlineById(id,orderVO.getDeadline());
         }
         if(!orderVO.getDescription().equals("")){
             orderRepository.updateDescriptionById(id,orderVO.getDescription());

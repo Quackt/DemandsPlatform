@@ -26,7 +26,7 @@ public class UserService {
         user.setName(userVO.getName());
         user.setEmailAddress(userVO.getEmail());
         user.setPhone(userVO.getPhone());
-        user.setSchoolCardId(userVO.getSchoolCardId());
+        user.setSchoolCardId(Long.parseLong(userVO.getSchoolCardId()));
         user.setSex(userVO.getSex());
         user.setPassword(userVO.getPassword());
         userRepository.save(user);
@@ -44,7 +44,7 @@ public class UserService {
         if(!userVO.getName().equals("")){
             userRepository.updateNameById(id,userVO.getName());
         }
-        if(!userVO.getSex().equals("")){
+        if(!userVO.getSex().equals("unknown")){
             userRepository.updateSexById(id,userVO.getSex());
         }
         if(!userVO.getPassword().equals("")){
@@ -75,15 +75,16 @@ public class UserService {
         if(!userVO.getName().equals("")){
             return userRepository.findByName(userVO.getName());
         }
-        if(!userVO.getSex().equals("")){
-            return userRepository.findBySex(userVO.getSex());
-        }
+
         if(!userVO.getPhone().equals("")){
             return userRepository.findByPhone(userVO.getPhone());
         }
         if(!userVO.getSchoolCardId().equals("")){
             long id = Long.parseLong(userVO.getSchoolCardId());
             return userRepository.findBySchoolCardId(id);
+        }
+        if(!userVO.getSex().equals("unknown")){
+            return userRepository.findBySex(userVO.getSex());
         }
         return null;
     }

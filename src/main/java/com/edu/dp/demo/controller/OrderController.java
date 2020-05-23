@@ -17,7 +17,7 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin
-@RequestMapping(value="/users")
+@RequestMapping(value="/orders")
 public class OrderController {
     @Autowired
     OrderService orderService;
@@ -27,8 +27,8 @@ public class OrderController {
         orderService.addOrder(orderVO);
     }
 
-    @DeleteMapping("/deleteOrders")
-    public void deleteOrders(@RequestParam(value="ids[]") List<Long> ids){
+    @PostMapping("/deleteOrders")
+    public void deleteOrders(@RequestBody List<Long> ids){
         orderService.deleteOrders(ids);
     }
 

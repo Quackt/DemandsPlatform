@@ -41,7 +41,9 @@ public class OrderInfo {
     @Column
     private int stars;
 
-    public OrderInfo(){};
+    public OrderInfo(){
+        this.date = new Timestamp(new java.util.Date().getTime());
+    };
 
     public OrderInfo(long publisherId, long accepterId, Timestamp deadline) {
         this.date = new Timestamp(new java.util.Date().getTime());

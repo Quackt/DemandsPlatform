@@ -14,7 +14,9 @@ import java.util.List;
 
 @Repository
 public interface OrderInfoRepository extends JpaRepository<OrderInfo,Long> {
-    @Query("delete from OrderInfo t where t.id in :ids")
+    @Modifying
+    @Query("delete from OrderInfo t where t.orderId in :ids")
+    @Transactional
     void deleteByIds(@Param("ids") List<Long> ids);
 
     @Modifying
@@ -23,9 +25,9 @@ public interface OrderInfoRepository extends JpaRepository<OrderInfo,Long> {
     void updateCommentAndStarsById(String comment,int stars,long id);
 
     @Modifying
-    @Query("update OrderInfo as c set c.deadline = ?2where c.orderId= ?1")
+    @Query("update OrderInfo as c set c.deadline = ?2 where c.orderId= ?1")
     @Transactional
-    void updateDeadlingById(long id,java.sql.Timestamp deadline);
+    void updateDeadlineById(long id,java.sql.Timestamp deadline);
 
     @Modifying
     @Query("update OrderInfo as c set c.description = ?2 where c.orderId= ?1")

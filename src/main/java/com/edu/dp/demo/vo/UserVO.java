@@ -1,6 +1,9 @@
 package com.edu.dp.demo.vo;
 
 import com.edu.dp.demo.entity.User;
+
+import static com.edu.dp.demo.entity.User.Sex.MALE;
+
 /**
  * @program DemandsPlatform
  * @description 用户信息交互类
@@ -22,6 +25,9 @@ public class UserVO {
     public UserVO(){};
 
     public UserVO(String name, User.Sex sex, String schoolCardId, String email, String phone, String password) {
+        if(sex.equals("")){
+            sex = MALE;
+        }
         this.name = name;
         this.sex = sex;
         this.schoolCardId = schoolCardId;

@@ -13,8 +13,9 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
-
+    @Modifying
     @Query("delete from User t where t.schoolCardId in :ids")
+    @Transactional
     void deleteByIds(@Param("ids")List<Long> ids);
 
     @Modifying

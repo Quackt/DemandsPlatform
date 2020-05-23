@@ -12,6 +12,7 @@ import java.sql.Date;
  */
 
 @Entity
+@Table
 public class User {
     public static enum Sex {MALE,FEMALE};
     @Id

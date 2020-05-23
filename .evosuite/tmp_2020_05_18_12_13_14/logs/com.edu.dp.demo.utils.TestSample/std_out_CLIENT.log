@@ -1,0 +1,4 @@
+[MASTER] 12:13:37.943 [pool-2-thread-1] WARN  TestSuiteSerialization - Cannot load tests because file does not exist: E:\DemondsPlatform\DemandsPlatform\.evosuite\evosuite-seeds\com.edu.dp.demo.utils.TestSample.seed
+[MASTER] 12:15:29.459 [pool-2-thread-1] WARN  TestSuiteMinimizer - Minimization timeout. Roll back to original test suite
+[MASTER] 12:15:43.491 [pool-2-thread-1] WARN  SimpleMutationAssertionGenerator - Assertion minimization is taking too long (0.9901428571428571% of time used, but only 11/65 tests minimized), falling back to using all assertions
+[MASTER] 12:15:43.801 [pool-2-thread-1] WARN  SimpleMutationAssertionGenerator - Reached maximum time to generate assertions, aborting assertion generation

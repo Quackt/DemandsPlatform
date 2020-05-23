@@ -14,31 +14,31 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 
-    @Query("delete from user t where t.school_card_id in :ids")
+    @Query("delete from User t where t.schoolCardId in :ids")
     void deleteByIds(@Param("ids")List<Long> ids);
 
     @Modifying
-    @Query("update user as c set c.email = ?2 where c.school_card_id= ?1")
+    @Query("update User as c set c.email = ?2 where c.schoolCardId= ?1")
     @Transactional
     void updateEmailById(long id,String email);
 
     @Modifying
-    @Query("update user as c set c.name = ?2 where c.school_card_id= ?1")
+    @Query("update User as c set c.name = ?2 where c.schoolCardId= ?1")
     @Transactional
     void updateNameById(long id, String name);
 
     @Modifying
-    @Query("update user as c set c.sex = ?2 where c.school_card_id= ?1")
+    @Query("update User as c set c.sex = ?2 where c.schoolCardId= ?1")
     @Transactional
     void updateSexById(long id, User.Sex sex);
 
     @Modifying
-    @Query("update user as c set c.password = ?2 where c.school_card_id= ?1")
+    @Query("update User as c set c.password = ?2 where c.schoolCardId= ?1")
     @Transactional
     void updatePasswordById(long id, String password);
 
     @Modifying
-    @Query("update user as c set c.phone = ?2 where c.school_card_id= ?1")
+    @Query("update User as c set c.phone = ?2 where c.schoolCardId= ?1")
     @Transactional
     void updatePhoneById(long id, String phone);
 

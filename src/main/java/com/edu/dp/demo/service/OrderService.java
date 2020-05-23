@@ -3,7 +3,7 @@ package com.edu.dp.demo.service;
 
 import com.edu.dp.demo.component.OrderControlComponent;
 import com.edu.dp.demo.entity.OrderInfo;
-import com.edu.dp.demo.repository.OrderRepository;
+import com.edu.dp.demo.repository.OrderInfoRepository;
 import com.edu.dp.demo.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class OrderService {
     @Autowired
-    OrderRepository orderRepository;
+    OrderInfoRepository orderRepository;
 
     /**
      * 添加一个需求

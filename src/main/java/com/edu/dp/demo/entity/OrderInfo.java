@@ -3,8 +3,6 @@ package com.edu.dp.demo.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
 
 /**
  * @program DemandsPlatform
@@ -12,6 +10,7 @@ import java.sql.Date;
  * @date 2020/05/13
  */
 @Entity
+@Table
 public class OrderInfo {
     public enum Status {FINISHED,UNFINISHED,CANCLED,WANTED,PROCESSING};
     @Id

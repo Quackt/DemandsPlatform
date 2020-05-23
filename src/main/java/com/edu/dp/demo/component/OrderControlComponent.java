@@ -1,7 +1,7 @@
 package com.edu.dp.demo.component;
 
 import com.edu.dp.demo.entity.OrderInfo;
-import com.edu.dp.demo.repository.OrderRepository;
+import com.edu.dp.demo.repository.OrderInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 public class OrderControlComponent {
     private static OrderInfoUnit orderInfoUnit = new OrderInfoUnit();
     @Autowired
-    OrderRepository orderRepository;
+    OrderInfoRepository orderRepository;
 
     public static void add(OrderInfo orderInfo){
         OrderInfoUnit orderInfoUnit = OrderControlComponent.orderInfoUnit;

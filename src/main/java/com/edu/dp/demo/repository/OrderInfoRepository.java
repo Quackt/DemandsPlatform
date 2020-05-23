@@ -13,32 +13,32 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
-public interface OrderRepository extends JpaRepository<OrderInfo,Long> {
-    @Query("delete from order_info t where t.id in :ids")
+public interface OrderInfoRepository extends JpaRepository<OrderInfo,Long> {
+    @Query("delete from OrderInfo t where t.id in :ids")
     void deleteByIds(@Param("ids") List<Long> ids);
 
     @Modifying
-    @Query("update order_info as c set c.comment = ?1,c.stars = ?2 where c.order_id= ?3")
+    @Query("update OrderInfo as c set c.comment = ?1,c.stars = ?2 where c.orderId= ?3")
     @Transactional
     void updateCommentAndStarsById(String comment,int stars,long id);
 
     @Modifying
-    @Query("update order_info as c set c.deadline = ?2where c.order_id= ?1")
+    @Query("update OrderInfo as c set c.deadline = ?2where c.orderId= ?1")
     @Transactional
     void updateDeadlingById(long id,java.sql.Timestamp deadline);
 
     @Modifying
-    @Query("update order_info as c set c.description = ?2 where c.order_id= ?1")
+    @Query("update OrderInfo as c set c.description = ?2 where c.orderId= ?1")
     @Transactional
     void updateDescriptionById(long id,String description);
 
     @Modifying
-    @Query("update order_info as c set c.accepter_id = ?2,c.status = ?3 where c.order_id= ?1")
+    @Query("update OrderInfo as c set c.accepterId = ?2,c.status = ?3 where c.orderId= ?1")
     @Transactional
     void updateAccepterIdAndStatusById(long orderId, long id, OrderInfo.Status processing);
 
     @Modifying
-    @Query("update order_info as c set c.status = ?2 where c.order_id= ?1")
+    @Query("update OrderInfo as c set c.status = ?2 where c.orderId= ?1")
     @Transactional
     void updateStatusById(long id, OrderInfo.Status status);
 

@@ -3,6 +3,7 @@ package com.edu.dp.demo.service;
 import com.edu.dp.demo.entity.User;
 import com.edu.dp.demo.repository.UserRepository;
 import com.edu.dp.demo.vo.UserVO;
+import com.edu.dp.demo.commons.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,8 @@ public class UserService {
      * 添加一个用户
      * @param userVO 用户交互类
      */
-    public void addUser(UserVO userVO) {
+    public Result addUser(UserVO userVO) {
+        Result result = new Result();
         User user = new User();
         user.setName(userVO.getName());
         user.setEmailAddress(userVO.getEmail());
@@ -29,38 +31,73 @@ public class UserService {
         user.setSchoolCardId(Long.parseLong(userVO.getSchoolCardId()));
         user.setSex(userVO.getSex());
         user.setPassword(userVO.getPassword());
-        userRepository.save(user);
+        try {
+            userRepository.save(user);
+        }catch (Exception e){
+            result.setCode(500);
+            result.setData(null);
+            result.setMsg("添加失败"+e.getMessage());
+            return result;
+        }
+        result.setCode(200);
+        result.setData(null);
+        result.setMsg("添加成功");
+        return result;
     }
 
     /**
      * 更新用户信息
      * @param userVO 用户交互类
      */
-    public void updateUserInfo(UserVO userVO) {
+    public Result updateUserInfo(UserVO userVO) {
+        Result result = new Result();
         long id = Long.parseLong(userVO.getSchoolCardId());
-        if(!userVO.getEmail().equals("")){
-            userRepository.updateEmailById(id,userVO.getEmail());
+        try {
+            if (!userVO.getEmail().equals("")) {
+                userRepository.updateEmailById(id, userVO.getEmail());
+            }
+            if (!userVO.getName().equals("")) {
+                userRepository.updateNameById(id, userVO.getName());
+            }
+            if (!userVO.getSex().equals("unknown")) {
+                userRepository.updateSexById(id, userVO.getSex());
+            }
+            if (!userVO.getPassword().equals("")) {
+                userRepository.updatePasswordById(id, userVO.getPassword());
+            }
+            if (!userVO.getPhone().equals("")) {
+                userRepository.updatePhoneById(id, userVO.getPhone());
+            }
+        }catch (Exception e){
+            result.setCode(500);
+            result.setData(null);
+            result.setMsg("更新失败" + e.getMessage());
+            return result;
         }
-        if(!userVO.getName().equals("")){
-            userRepository.updateNameById(id,userVO.getName());
-        }
-        if(!userVO.getSex().equals("unknown")){
-            userRepository.updateSexById(id,userVO.getSex());
-        }
-        if(!userVO.getPassword().equals("")){
-            userRepository.updatePasswordById(id,userVO.getPassword());
-        }
-        if(!userVO.getPhone().equals("")){
-            userRepository.updatePhoneById(id,userVO.getPhone());
-        }
+        result.setCode(200);
+        result.setData(null);
+        result.setMsg("更新成功");
+        return result;
     }
 
     /**
      * 删除一个用户
      * @param ids 被删除的一组用户id
      */
-    public void deleteUser(List<Long> ids) {
-        userRepository.deleteByIds(ids);
+    public Result deleteUser(List<Long> ids) {
+        Result result = new Result();
+        try {
+            userRepository.deleteByIds(ids);
+        }catch (Exception e){
+            result.setCode(500);
+            result.setData(null);
+            result.setMsg("删除失败"+e.getMessage());
+            return result;
+        }
+        result.setCode(200);
+        result.setData(null);
+        result.setMsg("删除成功");
+        return result;
     }
 
     /**

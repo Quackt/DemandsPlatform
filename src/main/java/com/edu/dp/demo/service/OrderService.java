@@ -7,7 +7,9 @@ import com.edu.dp.demo.repository.OrderInfoRepository;
 import com.edu.dp.demo.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.edu.dp.demo.commons.Result;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -24,12 +26,26 @@ public class OrderService {
      * 添加一个需求
      * @param orderVO 交互类
      */
-    public void addOrder(OrderVO orderVO) {
+    public Result addOrder(OrderVO orderVO) {
+        Result result = new Result();
         OrderInfo order = new OrderInfo();
-        order.setPublisherId(orderVO.getPublisherId());
-        order.setDeadline(orderVO.getDeadline());
-        order.setDescription(orderVO.getDescription());
-        orderRepository.save(order);
+        try{
+            order.setPublisherId(orderVO.getPublisherId());
+            order.setDeadline(orderVO.getDeadline());
+            order.setDescription(orderVO.getDescription());
+            orderRepository.save(order);
+        }catch (Exception e){
+            result.setCode(500);
+            result.setData(null);
+            result.setMsg("添加失败" + e.getMessage());
+            return result;
+        }
+        result.setCode(200);
+        result.setData(null);
+        result.setMsg("添加成功");
+        return  result;
+
+
 
     }
 
@@ -37,25 +53,58 @@ public class OrderService {
      * 更新需求信息
      * @param orderVO 交互类
      */
-    public void updateMessage(OrderVO orderVO) {
+    public Result updateMessage(OrderVO orderVO) {
         long id = orderVO.getOrderId();
+        Result result = new Result();
         if(!orderVO.getDeadline().equals(0)){
-            orderRepository.updateDeadlineById(id,orderVO.getDeadline());
+            try {
+                orderRepository.updateDeadlineById(id, orderVO.getDeadline());
+            }catch (Exception e){
+                result.setCode(500);
+                result.setData(null);
+                result.setMsg("更新失败" + e.getMessage());
+                return result;
+            }
         }
         if(!orderVO.getDescription().equals("")){
+            try{
             orderRepository.updateDescriptionById(id,orderVO.getDescription());
+            }catch (Exception e){
+                result.setCode(500);
+                result.setData(null);
+                result.setMsg("更新失败" + e.getMessage());
+                return result;
+            }
         }
+        result.setCode(200);
+        result.setData(null);
+        result.setMsg("更新成功");
+        return result;
+
     }
 
     /**
      * 添加评价
      * @param orderVO 交互类
      */
-    public void addComment(OrderVO orderVO) {
+    public Result addComment(OrderVO orderVO) {
         String comment = orderVO.getComment();
+        Result result = new Result();
         int stars = orderVO.getStars();
-        orderRepository.updateCommentAndStarsById(comment,stars,orderVO.getOrderId());
+        try {
+            orderRepository.updateCommentAndStarsById(comment,stars,orderVO.getOrderId());
+        }catch (Exception e){
+            result.setCode(500);
+            result.setData(null);
+            result.setMsg("添加失败" + e.getMessage());
+            return result;
+        }
+        result.setCode(200);
+        result.setData(null);
+        result.setMsg("添加成功");
+        return result;
     }
+
 
     /**
      * 查询需求信息
@@ -79,8 +128,21 @@ public class OrderService {
      * 删除需求信息
      * @param ids 要删除的id列表
      */
-    public void deleteOrders(List<Long> ids){
-        orderRepository.deleteByIds(ids);
+    public Result deleteOrders(List<Long> ids){
+        Result result = new Result();
+        try{
+            orderRepository.deleteByIds(ids);
+        }catch (Exception e){
+            result.setCode(500);
+            result.setData(null);
+            result.setMsg("删除失败" + e.getMessage());
+            return result;
+        }
+        result.setCode(200);
+        result.setData(null);
+        result.setMsg("删除成功");
+        return result;
+
     }
 
     /**
@@ -96,15 +158,39 @@ public class OrderService {
      * @param id 接收者id
      *         orderId 需求id
      */
-    public void takeOrder(long id,long orderId) {
-        orderRepository.updateAccepterIdAndStatusById(orderId,id,OrderInfo.Status.PROCESSING);
+    public Result takeOrder(long id,long orderId) {
+        Result result = new Result();
+        try {
+            orderRepository.updateAccepterIdAndStatusById(orderId, id, OrderInfo.Status.PROCESSING);
+        }catch (Exception e){
+            result.setCode(500);
+            result.setData(null);
+            result.setMsg("接受失败" + e.getMessage());
+            return result;
+        }
+        result.setCode(200);
+        result.setData(null);
+        result.setMsg("接受成功" + "订单号" + orderId);
+        return result;
     }
 
     /**
      * 完成一个需求
      * @param id orderId
      */
-    public void finishOrder(long id) {
-        orderRepository.updateStatusById(id,OrderInfo.Status.CANCLED);
+    public Result finishOrder(long id) {
+        Result result = new Result();
+        try {
+            orderRepository.updateStatusById(id, OrderInfo.Status.CANCLED);
+        }catch (Exception e){
+            result.setCode(500);
+            result.setData(null);
+            result.setMsg("订单无法完成" + e.getMessage());
+            return result;
+        }
+        result.setCode(200);
+        result.setData(null);
+        result.setMsg("订单:"+id+"已完成！");
+        return result;
     }
 }

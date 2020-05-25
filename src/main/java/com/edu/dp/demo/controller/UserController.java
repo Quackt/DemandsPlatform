@@ -1,6 +1,7 @@
 package com.edu.dp.demo.controller;
 
 import com.edu.dp.demo.entity.User;
+import com.edu.dp.demo.commons.Result;
 import com.edu.dp.demo.service.UserService;
 import com.edu.dp.demo.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +23,20 @@ public class UserController {
     UserService userService;
 
     @PostMapping(value = "/addUser")
-    public void addUser(@RequestBody UserVO userVO){
-        userService.addUser(userVO);
+    public Result addUser(@RequestBody UserVO userVO){
+        return userService.addUser(userVO);
     };
 
     @PostMapping(value = "/updateInfo")
-    public void updateUserInfo(@RequestBody UserVO userVO){
-        userService.updateUserInfo(userVO);
+    public Result updateUserInfo(@RequestBody UserVO userVO){
+
+        return userService.updateUserInfo(userVO);
     }
 
     @PostMapping("/delete")
-    public void deleteUsers(@RequestBody List<Long> ids){
-        userService.deleteUser(ids);
+    public Result deleteUsers(@RequestBody List<Long> ids){
+
+        return userService.deleteUser(ids);
     }
 
     @PostMapping("/query")

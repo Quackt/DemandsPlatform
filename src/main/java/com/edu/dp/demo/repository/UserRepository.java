@@ -1,6 +1,6 @@
 package com.edu.dp.demo.repository;
 
-import com.edu.dp.demo.entity.OrderInfo;
+
 import com.edu.dp.demo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

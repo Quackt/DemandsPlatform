@@ -1,7 +1,6 @@
 package com.edu.dp.demo.service;
 
 
-import com.edu.dp.demo.component.OrderControlComponent;
 import com.edu.dp.demo.entity.OrderInfo;
 import com.edu.dp.demo.repository.OrderInfoRepository;
 import com.edu.dp.demo.vo.OrderVO;
@@ -29,10 +28,12 @@ public class OrderService {
     public Result addOrder(OrderVO orderVO) {
         Result result = new Result();
         OrderInfo order = new OrderInfo();
-        try{
+        try {
             order.setPublisherId(orderVO.getPublisherId());
             order.setDeadline(orderVO.getDeadline());
             order.setDescription(orderVO.getDescription());
+            order.setPrice(orderVO.getPrice());
+            order.setType(orderVO.getType());
             orderRepository.save(order);
         }catch (Exception e){
             result.setCode(500);
@@ -44,9 +45,6 @@ public class OrderService {
         result.setData(null);
         result.setMsg("添加成功");
         return  result;
-
-
-
     }
 
     /**
@@ -56,25 +54,24 @@ public class OrderService {
     public Result updateMessage(OrderVO orderVO) {
         long id = orderVO.getOrderId();
         Result result = new Result();
-        if(!orderVO.getDeadline().equals(0)){
-            try {
+        try {
+            if (!orderVO.getDeadline().equals(0)) {
                 orderRepository.updateDeadlineById(id, orderVO.getDeadline());
-            }catch (Exception e){
-                result.setCode(500);
-                result.setData(null);
-                result.setMsg("更新失败" + e.getMessage());
-                return result;
             }
-        }
-        if(!orderVO.getDescription().equals("")){
-            try{
-            orderRepository.updateDescriptionById(id,orderVO.getDescription());
-            }catch (Exception e){
-                result.setCode(500);
-                result.setData(null);
-                result.setMsg("更新失败" + e.getMessage());
-                return result;
+            if (!orderVO.getDescription().equals("")) {
+                orderRepository.updateDescriptionById(id, orderVO.getDescription());
             }
+            if (!orderVO.getType().equals("")) {
+                orderRepository.updateTypeById(id, orderVO.getType());
+            }
+            if (orderVO.getPrice() != 0) {
+                orderRepository.updatePriceById(id, orderVO.getPrice());
+            }
+        }catch (Exception e){
+            result.setCode(500);
+            result.setData(null);
+            result.setMsg("更新失败" + e.getMessage());
+            return result;
         }
         result.setCode(200);
         result.setData(null);

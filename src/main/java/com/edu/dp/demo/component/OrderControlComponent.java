@@ -1,11 +1,12 @@
 package com.edu.dp.demo.component;
 
 import com.edu.dp.demo.entity.OrderInfo;
-import com.edu.dp.demo.repository.OrderInfoRepository;
+import com.edu.dp.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.sql.Timestamp;
 
 /**

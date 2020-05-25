@@ -25,9 +25,13 @@ public class OrderVO {
 
     private OrderInfo.Status status;
 
+    private double price;
+
+    private String type;
+
     public OrderVO(){};
 
-    public OrderVO(long orderId, long publisherId, Timestamp deadline, String description, String comment, int stars,OrderInfo.Status status) {
+    public OrderVO(long orderId, long publisherId, Timestamp deadline, String description, String comment, int stars,OrderInfo.Status status,double price,String type) {
         this.orderId = orderId;
         this.publisherId = publisherId;
         this.deadline = deadline;
@@ -35,6 +39,8 @@ public class OrderVO {
         this.comment = comment;
         this.stars = stars;
         this.status = status;
+        this.price = price;
+        this.type = type;
     }
 
     public long getOrderId() {
@@ -91,5 +97,29 @@ public class OrderVO {
 
     public void setStatus(OrderInfo.Status status) {
         this.status = status;
+    }
+
+    public long getAccepterId() {
+        return accepterId;
+    }
+
+    public void setAccepterId(long accepterId) {
+        this.accepterId = accepterId;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

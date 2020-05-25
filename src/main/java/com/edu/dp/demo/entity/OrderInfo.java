@@ -41,16 +41,24 @@ public class OrderInfo {
     @Column
     private int stars;
 
+    @Column
+    private double price;
+
+    @Column
+    private String type;
+
     public OrderInfo(){
         this.date = new Timestamp(new java.util.Date().getTime());
     };
 
-    public OrderInfo(long publisherId, long accepterId, Timestamp deadline) {
+    public OrderInfo(long publisherId, long accepterId, Timestamp deadline,double price,String type) {
         this.date = new Timestamp(new java.util.Date().getTime());
         this.publisherId = publisherId;
         this.accepterId = accepterId;
         this.deadline = deadline;
         this.status = Status.WANTED;
+        this.price = price;
+        this.type = type;
     }
 
     public long getOrderId() {
@@ -123,5 +131,21 @@ public class OrderInfo {
 
     public void setStars(int stars) {
         this.stars = stars;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

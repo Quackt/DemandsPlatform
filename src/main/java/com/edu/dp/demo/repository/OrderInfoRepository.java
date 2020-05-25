@@ -12,6 +12,9 @@ import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * @author ASUS
+ */
 @Repository
 public interface OrderInfoRepository extends JpaRepository<OrderInfo,Long> {
     @Modifying
@@ -30,9 +33,19 @@ public interface OrderInfoRepository extends JpaRepository<OrderInfo,Long> {
     void updateDeadlineById(long id,java.sql.Timestamp deadline);
 
     @Modifying
+    @Query("update OrderInfo as c set c.price = ?2 where c.orderId= ?1")
+    @Transactional
+    void updatePriceById(long id,double price);
+
+    @Modifying
     @Query("update OrderInfo as c set c.description = ?2 where c.orderId= ?1")
     @Transactional
     void updateDescriptionById(long id,String description);
+
+    @Modifying
+    @Query("update OrderInfo as c set c.type = ?2 where c.orderId= ?1")
+    @Transactional
+    void updateTypeById(long id,String type);
 
     @Modifying
     @Query("update OrderInfo as c set c.accepterId = ?2,c.status = ?3 where c.orderId= ?1")

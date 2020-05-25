@@ -1,7 +1,6 @@
 package com.edu.dp.demo.service;
 
 
-import com.edu.dp.demo.component.OrderControlComponent;
 import com.edu.dp.demo.entity.OrderInfo;
 import com.edu.dp.demo.repository.OrderInfoRepository;
 import com.edu.dp.demo.vo.OrderVO;
@@ -29,6 +28,8 @@ public class OrderService {
         order.setPublisherId(orderVO.getPublisherId());
         order.setDeadline(orderVO.getDeadline());
         order.setDescription(orderVO.getDescription());
+        order.setPrice(orderVO.getPrice());
+        order.setType(orderVO.getType());
         orderRepository.save(order);
 
     }
@@ -44,6 +45,12 @@ public class OrderService {
         }
         if(!orderVO.getDescription().equals("")){
             orderRepository.updateDescriptionById(id,orderVO.getDescription());
+        }
+        if(!orderVO.getType().equals("")){
+            orderRepository.updateTypeById(id,orderVO.getType());
+        }
+        if(orderVO.getPrice()!=0){
+            orderRepository.updatePriceById(id,orderVO.getPrice());
         }
     }
 

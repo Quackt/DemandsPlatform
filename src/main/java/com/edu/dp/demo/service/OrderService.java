@@ -32,6 +32,7 @@ public class OrderService {
             order.setPublisherId(orderVO.getPublisherId());
             order.setDeadline(orderVO.getDeadline());
             order.setDescription(orderVO.getDescription());
+            order.setStatus(orderVO.getStatus());
             order.setPrice(orderVO.getPrice());
             order.setType(orderVO.getType());
             orderRepository.save(order);
